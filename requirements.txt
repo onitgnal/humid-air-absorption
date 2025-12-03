@@ -1,0 +1,9 @@
+# Numerical and plotting stack
+numpy
+scipy
+pandas
+matplotlib
+
+# HITRAN line access (installs the HAPI module)
+hitran-api
+tqdm
