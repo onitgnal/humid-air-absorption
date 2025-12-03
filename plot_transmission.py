@@ -159,6 +159,12 @@ if __name__ == "__main__":
     parser.add_argument("--dnu", type=float, default=0.05, help="Wavenumber step in cm^-1.")
     parser.add_argument("--path-cm", type=float, default=1.0, help="Path length in cm for transmission/absorption plots.")
     parser.add_argument(
+        "--rh",
+        type=float,
+        default=0.50,
+        help="Relative humidity (0.0 to 1.0). Default is 0.50.",
+    )
+    parser.add_argument(
         "--y-mode",
         choices=["transmission", "alpha"],
         default="transmission",
@@ -199,7 +205,7 @@ if __name__ == "__main__":
     # Conditions
     T_C = 22.0
     T_K = 273.15 + T_C
-    RH = 0.50
+    RH = args.rh
     P_ATM = 1.0
     L_CM = args.path_cm
 
@@ -264,12 +270,21 @@ if __name__ == "__main__":
     fig, ax1 = plt.subplots(figsize=(8, 4))
 
     if args.y_mode == "transmission":
-        ax1.plot(wl_sorted, trans_sorted, color="navy", label=f"T (L={L_CM:.2f} cm)")
+        y_values = trans_sorted
+        ax1.plot(wl_sorted, y_values, color="navy", label=f"T (L={L_CM:.2f} cm)")
         ax1.set_ylabel(f"Transmission (L={L_CM:.2f} cm)")
-        ax1.set_ylim(0, 1.05)
     else:
-        ax1.plot(wl_sorted, alpha_m_sorted, color="navy", label="α [m^-1]")
+        y_values = alpha_m_sorted
+        ax1.plot(wl_sorted, y_values, color="navy", label="α [m^-1]")
         ax1.set_ylabel("Absorption coefficient α [m$^{-1}$]")
+
+    y_min = float(np.min(y_values))
+    y_max = float(np.max(y_values))
+    if math.isclose(y_min, y_max):
+        pad = 0.05 * (abs(y_min) if y_min != 0 else 1.0)  # avoid zero-height axis when flat
+        y_min -= pad
+        y_max += pad
+    ax1.set_ylim(y_min, y_max)
 
     ax1.set_xlabel("Wavelength [µm]")
     ax1.grid(True, alpha=0.3)
