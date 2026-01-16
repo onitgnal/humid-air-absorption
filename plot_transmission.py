@@ -258,14 +258,32 @@ if __name__ == "__main__":
         delta_n_label = "Δn"
 
     transmission = np.exp(-alpha * L_CM)
+    transmission_1cm = np.exp(-alpha * 1.0)
+    delta_n_ppm = delta_n * 1e6
     alpha_m = alpha * 100.0  # cm^-1 -> m^-1
 
     # Sort by wavelength for a left-to-right increasing axis
     order = np.argsort(wl_um)
     wl_sorted = wl_um[order]
     trans_sorted = transmission[order]
+    trans_sorted_1cm = transmission_1cm[order]
+    delta_n_sorted = delta_n[order]
     dn_sorted = delta_n_plot[order]
+    dn_sorted_ppm = delta_n_ppm[order]
     alpha_m_sorted = alpha_m[order]
+
+    L_M = 0.01  # 1 cm in meters
+    wavelength_m = wl_sorted * 1e-6
+    phase_sorted = (2.0 * math.pi / wavelength_m) * delta_n_sorted * L_M
+
+    data_path = "trans_delta_n_fullres.txt"
+    data_cols = np.column_stack((wl_sorted, trans_sorted_1cm, dn_sorted_ppm, phase_sorted))
+    np.savetxt(
+        data_path,
+        data_cols,
+        header="wavelength_um transmission_L1cm delta_n_ppm phase_rad_L1cm",
+        fmt="%.10g",
+    )
 
     fig, ax1 = plt.subplots(figsize=(8, 4))
 

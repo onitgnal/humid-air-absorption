@@ -1,0 +1,6 @@
+<?xml version="1.0" standalone="yes" ?>
+<ChirpFile version="1.0" creator="vChirp v1.9" lambdaF="1950" lambda0="1875">
+    <element typeid="SetGDD" start="1000" stop="2000" GDD="0" center="1800" TOD="0" id="8" />
+    <element typeid="Spectrum_SuperGauss" center="1910" bandwidth="1.62" order="05" intensity="1" combine="0" id="9" />
+    <element typeid="DataFileElement" file="Y:\Github\humid-air-absorption\trans_delta_n_fullres.txt" T="1" GDD="$4*100*12" omega="nm2PHz($1*1e3)*2*pi" dataType="2" id="4" />
+</ChirpFile>
