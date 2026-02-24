@@ -65,7 +65,7 @@ python plot_transmission.py \
 *   `--rh` (float): Relative humidity as a fraction (0.0 to 1.0). **Default:** `0.50` (50%)
 *   `--y-mode` (string): What to plot on the primary Y-axis. Choices: `transmission` or `alpha` (absorption coefficient in m⁻¹). **Default:** `transmission`
 *   `--delta-n-unit` (string): Unit for the Δn axis. Choices: `dimensionless` or `ppm` (parts per million). **Default:** `dimensionless`
-*   `--delta-n-sign` (string): Forces the sign convention for Δn. `paper` matches the Gebhardt reference; `previous` flips the sign. **Default:** `paper`
+*   `--delta-n-sign` (string): Forces the sign convention for Δn. `paper` matches the Gebhardt reference; `previous` flips the sign. Note that the sign of Δn is manually swapped in the code to fit the results of Fig. 4 from the paper. **Default:** `paper`
 
 **Numerical Method Arguments:**
 *   `--kk-method` (string): The integration method for the Kramers-Kronig relation. Choices: `maclaurin` or `hilbert`. **Default:** `maclaurin`

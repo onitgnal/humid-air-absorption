@@ -312,8 +312,8 @@ if __name__ == "__main__":
     ax2.set_ylabel(f"{delta_n_label} (from KK of α)")
 
     title = (
-        f"Sea level, 50% RH, T=22°C | "
-        f"{args.lambda_min_um:.2f}–{args.lambda_max_um:.2f} µm | Δn sign: {args.delta_n_sign}"
+        f"{args.rh * 100:.0f}% RH, T=22°C | "
+        f"{args.lambda_min_um:.2f}–{args.lambda_max_um:.2f} µm"
     )
     fig.suptitle(title)
     fig.tight_layout()
