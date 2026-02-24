@@ -17,12 +17,44 @@ The physical and numerical methodology—specifically how the refractive index c
 
 *   **Gebhardt et al., "Impact of atmospheric molecular absorption on the temporal and spatial evolution of ultra-short optical pulses," *Optics Express* 23(11):13776-13787 (2015). DOI: [10.1364/OE.23.013776](https://doi.org/10.1364/OE.23.013776)**
 
+## Installation
+
+Ensure you have Python 3 installed. You can install the required dependencies using `pip` and the provided `requirements.txt` file:
+
+```bash
+# Optional: Create and activate a virtual environment
+python3 -m venv .venv
+source .venv/bin/activate
+
+# Install the required packages
+pip install -r requirements.txt
+```
+
 ## Usage and Arguments
 
 The script is executed via the command line. You can customize the simulation using the following arguments:
 
 ```bash
 python plot_transmission.py [arguments]
+```
+
+### Example
+
+To reproduce the result shown in Fig. 4 of the paper focusing on a specific wavelength range (1.911 µm to 1.922 µm), with a 12-meter (1200 cm) propagation path in a climate chamber at 60% relative humidity, while explicitly providing all arguments (even those left at their default values), use the following command:
+
+```bash
+python plot_transmission.py \
+    --lambda-min-um 1.911 \
+    --lambda-max-um 1.922 \
+    --dnu 0.05 \
+    --path-cm 1200 \
+    --rh 0.60 \
+    --y-mode transmission \
+    --delta-n-unit dimensionless \
+    --delta-n-sign paper \
+    --kk-method maclaurin \
+    --kk-downsample 1 \
+    --kk-pad-factor 4
 ```
 
 **Physics & Output Arguments:**
